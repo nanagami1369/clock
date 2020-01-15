@@ -25,6 +25,10 @@
 <body>
 <div id="clock"></div>
 <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').then();
+    }
+
     const clockElm = document.querySelector("#clock");
     setInterval(() => {
         const currentDate = new Date();
