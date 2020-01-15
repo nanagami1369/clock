@@ -1,0 +1,14 @@
+{
+  "background_color": "rgba(38,50,56 ,1)",
+  "description": "I cast a spell transforming your device to table clock.",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "clockIcon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "name": "TableClock",
+  "short_name": "Clock"
+}
