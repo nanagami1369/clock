@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>clock</title>
+    <style>
+        html, body {
+            overflow: hidden;
+            background-color: rgba(38, 50, 56, 1);
+        }
+
+        #clock {
+            height: 100vh;
+            width: 100vw;
+            font-size: 20vw;
+            color: rgba(236, 239, 241, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="clock"></div>
+<script>
+    const clockElm = document.querySelector("#clock");
+    setInterval(() => {
+        const currentDate = new Date();
+        const currentHours = currentDate.getHours().toString().length === 1 ? "0" + currentDate.getHours().toString() : currentDate.getHours().toString();
+        const currentMinutes = currentDate.getMinutes().toString().length === 1 ? "0" + currentDate.getMinutes().toString() : currentDate.getMinutes().toString();
+        const currentSeconds = currentDate.getSeconds().toString().length === 1 ? "0" + currentDate.getSeconds().toString() : currentDate.getSeconds().toString();
+        clockElm.textContent = `${currentHours}:${currentMinutes}:${currentSeconds}`
+    }, 500)
+</script>
+</body>
+</html>
