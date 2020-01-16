@@ -20,10 +20,75 @@
             justify-content: center;
             text-align: center;
         }
+
+        #setting-opener {
+            position: absolute;
+            right: 0;
+            top: 0;
+            margin-right: 1vw;
+            margin-top: 1vw;
+            height: 2vw;
+            width: 2vw;
+            padding: .5vw;
+            font-size: 2vw;
+            line-height: 2vw;
+            border: 1px solid rgba(236, 239, 241, 1);
+            border-radius: 50%;
+            color: rgba(236, 239, 241, 1);
+        }
+
+        #setting {
+            position: absolute;
+            width: 50vw;
+            height: 40vh;
+            margin: auto;
+            inset: 0;
+            border: 1px solid rgba(236, 239, 241, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #setting-btn {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        #setting button {
+            width: 20vw;
+            height: 12vh;
+        }
+
+        #setting-background {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            inset: 0;
+            margin: 0;
+            background: rgba(38, 50, 56, .75);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .rotate {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body>
 <div id="clock"></div>
+<div id="setting-opener">⚙️</div>
+<div id="setting-background" class="hidden"></div>
+<div id="setting" class="hidden">
+    <div id="setting-btn">
+        <button id="setting-rotate">画面を回転</button>
+        <button id="setting-close">設定を閉じる</button>
+    </div>
+
+</div>
+
 <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js').then();
@@ -36,7 +101,33 @@
         const currentMinutes = currentDate.getMinutes().toString().length === 1 ? "0" + currentDate.getMinutes().toString() : currentDate.getMinutes().toString();
         const currentSeconds = currentDate.getSeconds().toString().length === 1 ? "0" + currentDate.getSeconds().toString() : currentDate.getSeconds().toString();
         clockElm.textContent = `${currentHours}:${currentMinutes}:${currentSeconds}`
-    }, 500)
+    }, 500);
+
+
+    const settingOpenerElm = document.querySelector("#setting-opener");
+    const settingElm = document.querySelector("#setting");
+    const settingBackgroundElm = document.querySelector("#setting-background");
+    const rotateElm = document.querySelector("#setting-rotate");
+    const closeElm = document.querySelector("#setting-close");
+
+    settingOpenerElm.addEventListener("click", () => {
+        settingElm.classList.remove("hidden");
+        settingBackgroundElm.classList.remove("hidden");
+    });
+
+    settingBackgroundElm.addEventListener("click", () => {
+        settingElm.classList.add("hidden");
+        settingBackgroundElm.classList.add("hidden");
+    });
+
+    closeElm.addEventListener("click", () => {
+        settingElm.classList.add("hidden");
+        settingBackgroundElm.classList.add("hidden");
+    });
+
+    rotateElm.addEventListener("click", () => {
+        clockElm.classList.toggle("rotate");
+    })
 </script>
 </body>
 </html>
